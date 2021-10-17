@@ -17,7 +17,6 @@ let compute_slack l w h =
             w * l
          else
             h * l
-
 ;;
 
 let compute_right_rectangular_prism_square_feet l w h = (2*l*w + 2*w*h + 2*h*l) + (compute_slack l w h);;
