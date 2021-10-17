@@ -1,11 +1,21 @@
 open Printf
+open String
 
 let input = "input.txt"
 
-let rec input_lines file =
-   match try (input_line file) with End_of_file -> "" with
-      | "" -> 0
-      | line -> (input_lines file)
-    ;;
+let rec string_to_char_list ch = match ch with
+    | "" -> []
+    | ch -> (String.get ch 0 ) :: (string_to_char_list (String.sub ch 1 ( (String.length ch)-1) ) )  ;;
 
-print_int (input_lines (open_in input));;
+let move character = match character with
+    | '(' -> 1
+    | _ -> -1
+;;
+
+let rec compute_floor str floor = match str with
+    | [] -> floor
+    | h::t -> compute_floor t (floor + (move h))
+;;
+
+
+print_int (compute_floor (string_to_char_list (input_line (open_in input))) 0);;
